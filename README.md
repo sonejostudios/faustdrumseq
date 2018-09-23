@@ -1,4 +1,4 @@
 # faustdrumseq
-very simple drum sequencer
+very simple drum sequencer written with Faust.
 
-written with Faust.
+http://faust.grame.fr/

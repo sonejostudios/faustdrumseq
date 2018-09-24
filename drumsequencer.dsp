@@ -5,13 +5,13 @@ import("stdfaust.lib");
 
 process =  k, hh, sn :> _,_;
 
-looplength = 8;
+looplength = 16;
 bpm = hslider("bpm",120,40,240,1) *2;
 
 beat_seq = ba.beat(bpm) : ba.pulse_countup_loop(looplength-1,1) : hbargraph("seq",0,looplength-1) ;
 playhead(x) = (1:+~_*trigger(x): _*1); // _*1 is speed
 trigger(x) = steps(x) : par(i,looplength, _<: (_>_@1)  : _) :> 1-_ ;
-steps(x) = hgroup("%x", par(i,looplength, checkbox("%i"))) : par(i, looplength, _*(beat_seq==i) );
+steps(x) = hgroup("%x", par(i,looplength, checkbox(" %2i "))) : par(i, looplength, _*(beat_seq==i) );
 
 
 k =  playhead(1) : soundfile("label[url:/media/sda7/Programming/Faust/Vinz4/k.wav]",1) : !,!,!,_*k_vol<:_,_;
